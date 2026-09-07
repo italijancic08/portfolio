@@ -740,6 +740,33 @@ button {
         #0c0c0c;
 }
 
+.project-real-image {
+    position: absolute;
+
+    width: 82%;
+    height: 78%;
+
+    left: 50%;
+    top: 55%;
+
+    transform: translate(-50%, -50%);
+
+    object-fit: cover;
+
+    border: 1px solid #252525;
+    border-radius: 8px;
+
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        0 0 50px rgba(124, 58, 237, 0.08);
+
+    transition: 0.5s ease;
+}
+
+.project-card:hover .project-real-image {
+    transform: translate(-50%, -50%) scale(1.03);
+}
+
 .project-overlay {
     position: absolute;
 
