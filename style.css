@@ -65,10 +65,13 @@ button {
     position: fixed;
     top: 0;
     left: 0;
+
     width: 100%;
+
     z-index: 1000;
 
     background: rgba(8, 8, 8, 0.75);
+
     backdrop-filter: blur(15px);
 
     border-bottom: 1px solid transparent;
@@ -90,6 +93,7 @@ button {
 
 .logo {
     font-family: "Space Grotesk", sans-serif;
+
     font-size: 25px;
     font-weight: 700;
 }
@@ -98,9 +102,13 @@ button {
     color: var(--accent-light);
 }
 
+
+/* ================= NAV MENU ================= */
+
 .nav-menu {
     display: flex;
     align-items: center;
+
     gap: 34px;
 }
 
@@ -108,6 +116,7 @@ button {
     position: relative;
 
     color: #888;
+
     font-size: 14px;
     font-weight: 500;
 
@@ -140,16 +149,70 @@ button {
     width: 100%;
 }
 
+
+/* =========================================================
+   BOTÓN HAMBURGUESA
+========================================================= */
+
 .menu-button {
     display: none;
 
-    background: none;
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+    margin: 0;
+
     border: none;
 
-    color: white;
-    font-size: 25px;
+    background: transparent;
 
     cursor: pointer;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    z-index: 1001;
+}
+
+.menu-button span {
+    display: block;
+
+    width: 26px;
+    height: 2px;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    transform-origin: center;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.2s ease,
+        width 0.3s ease;
+}
+
+
+/* ================= HAMBURGUESA → X ================= */
+
+.menu-button.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-button.open span:nth-child(2) {
+    opacity: 0;
+
+    width: 0;
+}
+
+.menu-button.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 
@@ -182,6 +245,7 @@ button {
     background: var(--accent);
 
     filter: blur(180px);
+
     opacity: 0.12;
 
     pointer-events: none;
@@ -189,7 +253,9 @@ button {
 
 .hero-container {
     display: grid;
+
     grid-template-columns: 1.05fr 0.95fr;
+
     gap: 70px;
 
     align-items: center;
@@ -200,6 +266,7 @@ button {
 
     font-size: 13px;
     font-weight: 700;
+
     letter-spacing: 4px;
 
     color: var(--accent-light);
@@ -209,6 +276,7 @@ button {
     font-family: "Space Grotesk", sans-serif;
 
     font-size: clamp(55px, 7vw, 92px);
+
     line-height: 0.95;
 
     letter-spacing: -5px;
@@ -216,6 +284,7 @@ button {
 
 .hero h1 span {
     display: block;
+
     color: var(--accent-light);
 }
 
@@ -236,12 +305,14 @@ button {
     color: var(--muted);
 
     line-height: 1.8;
+
     font-size: 16px;
 }
 
 .status {
     display: inline-flex;
     align-items: center;
+
     gap: 9px;
 
     margin-bottom: 35px;
@@ -249,6 +320,7 @@ button {
     padding: 8px 13px;
 
     border: 1px solid var(--border);
+
     border-radius: 100px;
 
     background: rgba(255, 255, 255, 0.025);
@@ -271,6 +343,7 @@ button {
 
 .hero-buttons {
     display: flex;
+
     gap: 12px;
 
     margin-top: 35px;
@@ -280,6 +353,7 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     gap: 15px;
 
     padding: 14px 23px;
@@ -294,32 +368,39 @@ button {
 
 .btn-primary {
     background: white;
+
     color: black;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
+
     background: var(--accent-light);
+
     color: white;
 }
 
 .btn-secondary {
     border: 1px solid var(--border);
+
     color: white;
 }
 
 .btn-secondary:hover {
     background: white;
+
     color: black;
 }
 
 .hero-socials {
     display: flex;
+
     gap: 25px;
 
     margin-top: 35px;
 
     color: #777;
+
     font-size: 13px;
 }
 
@@ -340,6 +421,7 @@ button {
     background: #0d0d0d;
 
     border: 1px solid var(--border);
+
     border-radius: 13px;
 
     box-shadow:
@@ -368,6 +450,7 @@ button {
 
 .window-buttons {
     display: flex;
+
     gap: 6px;
 
     width: 100px;
@@ -384,6 +467,7 @@ button {
 
 .window-top p {
     color: #555;
+
     font-size: 12px;
 }
 
@@ -395,6 +479,7 @@ button {
     color: #bbb;
 
     font-size: 13px;
+
     line-height: 2;
 }
 
@@ -425,14 +510,6 @@ button {
     vertical-align: middle;
 
     background: var(--accent-light);
-
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
 }
 
 .scroll-indicator {
@@ -446,7 +523,9 @@ button {
     color: #555;
 
     font-size: 10px;
+
     letter-spacing: 2px;
+
     text-transform: uppercase;
 }
 
@@ -506,6 +585,7 @@ button {
 
 .about-grid {
     display: grid;
+
     grid-template-columns: 1.2fr 0.8fr;
 
     gap: 100px;
@@ -515,6 +595,7 @@ button {
     color: #999;
 
     font-size: 16px;
+
     line-height: 1.9;
 }
 
@@ -526,11 +607,13 @@ button {
     color: white;
 
     font-size: 22px;
+
     line-height: 1.5;
 }
 
 .about-stats {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
 
     gap: 1px;
@@ -544,7 +627,9 @@ button {
     min-height: 160px;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
 
     padding: 30px;
@@ -577,6 +662,7 @@ button {
 
 .skills-grid {
     display: grid;
+
     grid-template-columns: repeat(4, 1fr);
 
     gap: 15px;
@@ -588,6 +674,7 @@ button {
     background: var(--card);
 
     border: 1px solid var(--border);
+
     border-radius: var(--radius);
 
     transition: 0.3s ease;
@@ -595,12 +682,15 @@ button {
 
 .skill-card:hover {
     transform: translateY(-7px);
+
     background: var(--card-hover);
+
     border-color: rgba(155, 101, 255, 0.3);
 }
 
 .skill-icon {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
@@ -610,6 +700,7 @@ button {
     margin-bottom: 30px;
 
     border: 1px solid var(--border);
+
     border-radius: 8px;
 
     color: var(--accent-light);
@@ -632,11 +723,13 @@ button {
     color: #777;
 
     font-size: 13px;
+
     line-height: 1.7;
 }
 
 .skill-tags {
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 7px;
@@ -649,6 +742,7 @@ button {
     padding: 6px 9px;
 
     border: 1px solid var(--border);
+
     border-radius: 5px;
 
     color: #888;
@@ -658,7 +752,9 @@ button {
 
 .tech-list {
     display: flex;
+
     flex-wrap: wrap;
+
     justify-content: center;
 
     gap: 30px;
@@ -679,7 +775,9 @@ button {
 
 .projects-header {
     display: flex;
+
     justify-content: space-between;
+
     align-items: end;
 
     gap: 50px;
@@ -691,11 +789,13 @@ button {
     color: #777;
 
     line-height: 1.7;
+
     font-size: 13px;
 }
 
 .projects-grid {
     display: grid;
+
     grid-template-columns: repeat(2, 1fr);
 
     gap: 20px;
@@ -707,6 +807,7 @@ button {
     background: var(--card);
 
     border: 1px solid var(--border);
+
     border-radius: var(--radius);
 
     transition: 0.35s ease;
@@ -714,6 +815,7 @@ button {
 
 .project-card:hover {
     transform: translateY(-8px);
+
     border-color: rgba(155, 101, 255, 0.3);
 }
 
@@ -721,6 +823,7 @@ button {
     grid-column: span 2;
 
     display: grid;
+
     grid-template-columns: 1.2fr 0.8fr;
 }
 
@@ -754,6 +857,7 @@ button {
     object-fit: cover;
 
     border: 1px solid #252525;
+
     border-radius: 8px;
 
     box-shadow:
@@ -777,157 +881,14 @@ button {
     right: 20px;
 
     display: flex;
+
     justify-content: space-between;
 
     color: #666;
 
     font-size: 9px;
+
     letter-spacing: 2px;
-}
-
-.project-screen {
-    position: absolute;
-
-    width: 75%;
-    height: 65%;
-
-    left: 50%;
-    top: 55%;
-
-    transform: translate(-50%, -50%);
-
-    display: flex;
-
-    border: 1px solid #252525;
-
-    background: #111;
-
-    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
-}
-
-.fake-sidebar {
-    width: 25%;
-
-    background: #0b0b0b;
-
-    border-right: 1px solid #222;
-}
-
-.fake-content {
-    flex: 1;
-
-    padding: 20px;
-}
-
-.fake-content div {
-    height: 35px;
-
-    margin-bottom: 12px;
-
-    background: #1d1d1d;
-
-    border-radius: 5px;
-}
-
-.fake-content div:first-child {
-    width: 55%;
-
-    background: #262626;
-}
-
-.dashboard-preview {
-    position: absolute;
-
-    width: 75%;
-    height: 65%;
-
-    left: 50%;
-    top: 55%;
-
-    transform: translate(-50%, -50%);
-
-    padding: 20px;
-
-    border: 1px solid #252525;
-
-    background: #111;
-}
-
-.chart {
-    width: 100%;
-    height: 50%;
-
-    border-bottom: 1px solid #222;
-
-    background:
-        linear-gradient(
-            160deg,
-            transparent 45%,
-            rgba(155, 101, 255, 0.4) 46%,
-            transparent 48%
-        );
-}
-
-.mini-cards {
-    display: flex;
-    gap: 8px;
-
-    margin-top: 15px;
-}
-
-.mini-cards div {
-    flex: 1;
-
-    height: 35px;
-
-    background: #1c1c1c;
-
-    border-radius: 5px;
-}
-
-.database-preview {
-    position: absolute;
-
-    width: 75%;
-    height: 65%;
-
-    left: 50%;
-    top: 55%;
-
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-direction: column;
-
-    gap: 10px;
-}
-
-.db-circle {
-    width: 70px;
-    height: 70px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid var(--accent);
-
-    border-radius: 50%;
-
-    color: var(--accent-light);
-
-    font-weight: 700;
-    font-size: 13px;
-}
-
-.db-line {
-    width: 100px;
-    height: 1px;
-
-    background: #333;
 }
 
 .project-info {
@@ -957,11 +918,13 @@ button {
     color: #777;
 
     font-size: 13px;
+
     line-height: 1.7;
 }
 
 .project-tech {
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 6px;
@@ -999,6 +962,7 @@ button {
 
 .service {
     display: grid;
+
     grid-template-columns: 80px 1fr 50px;
 
     align-items: center;
@@ -1041,6 +1005,7 @@ button {
     color: #666;
 
     font-size: 13px;
+
     line-height: 1.6;
 }
 
@@ -1075,6 +1040,7 @@ button {
         #101010;
 
     border: 1px solid var(--border);
+
     border-radius: 20px;
 }
 
@@ -1119,7 +1085,9 @@ footer {
 
 .footer-container {
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 }
 
@@ -1133,6 +1101,7 @@ footer {
 
 .footer-links {
     display: flex;
+
     gap: 25px;
 
     color: #666;
@@ -1162,23 +1131,29 @@ footer {
 
 .hero-code {
     animation-delay: 0.15s;
+
     opacity: 0;
 }
 
 @keyframes fadeUp {
+
     from {
         opacity: 0;
+
         transform: translateY(25px);
     }
 
     to {
         opacity: 1;
+
         transform: translateY(0);
     }
+
 }
 
 .reveal {
     opacity: 0;
+
     transform: translateY(35px);
 
     transition:
@@ -1188,15 +1163,22 @@ footer {
 
 .reveal.visible {
     opacity: 1;
+
     transform: translateY(0);
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE - TABLET
 ========================================================= */
 
 @media (max-width: 950px) {
+
+    /* NAVBAR */
+
+    .menu-button {
+        display: flex;
+    }
 
     .nav-menu {
         position: absolute;
@@ -1206,23 +1188,56 @@ footer {
 
         width: 100%;
 
-        display: none;
+        display: flex;
+
         flex-direction: column;
 
-        padding: 25px;
+        align-items: stretch;
+
+        gap: 0;
+
+        padding: 10px 25px 25px;
 
         background: #0b0b0b;
 
         border-bottom: 1px solid var(--border);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transform: translateY(-10px);
+
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease,
+            visibility 0.3s ease;
     }
 
     .nav-menu.open {
-        display: flex;
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: translateY(0);
     }
 
-    .menu-button {
-        display: block;
+    .nav-menu a {
+        padding: 16px 0;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
+
+    .nav-menu a:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a::after {
+        display: none;
+    }
+
+
+    /* HERO */
 
     .hero-container {
         grid-template-columns: 1fr;
@@ -1230,6 +1245,7 @@ footer {
 
     .hero {
         padding-top: 130px;
+
         padding-bottom: 100px;
     }
 
@@ -1237,14 +1253,24 @@ footer {
         max-width: 650px;
     }
 
+
+    /* ABOUT */
+
     .about-grid {
         grid-template-columns: 1fr;
+
         gap: 50px;
     }
+
+
+    /* SKILLS */
 
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+
+    /* PROJECT */
 
     .project-card.featured {
         grid-column: span 1;
@@ -1254,6 +1280,10 @@ footer {
 
 }
 
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
 
 @media (max-width: 650px) {
 
@@ -1265,8 +1295,12 @@ footer {
         padding: 90px 0;
     }
 
+
+    /* HERO */
+
     .hero h1 {
         font-size: 60px;
+
         letter-spacing: -4px;
     }
 
@@ -1276,6 +1310,7 @@ footer {
 
     .hero-buttons {
         flex-direction: column;
+
         align-items: stretch;
     }
 
@@ -1291,14 +1326,21 @@ footer {
         display: none;
     }
 
+
+    /* SECTIONS */
+
     .section-header {
         margin-bottom: 45px;
     }
 
     .section-header h2 {
         font-size: 43px;
+
         letter-spacing: -2px;
     }
+
+
+    /* SKILLS */
 
     .skills-grid {
         grid-template-columns: 1fr;
@@ -1307,6 +1349,9 @@ footer {
     .skill-card p {
         min-height: auto;
     }
+
+
+    /* PROJECTS */
 
     .projects-header {
         display: block;
@@ -1328,8 +1373,16 @@ footer {
         min-height: 250px;
     }
 
+    .project-info {
+        padding: 28px 22px;
+    }
+
+
+    /* SERVICES */
+
     .service {
         grid-template-columns: 35px 1fr 25px;
+
         gap: 10px;
     }
 
@@ -1341,85 +1394,28 @@ footer {
         font-size: 12px;
     }
 
+
+    /* CONTACT */
+
     .contact-box {
         padding: 55px 30px;
     }
 
     .contact-box h2 {
         font-size: 47px;
+
         letter-spacing: -3px;
     }
 
+
+    /* FOOTER */
+
     .footer-container {
         flex-direction: column;
+
         align-items: flex-start;
 
         gap: 25px;
     }
-
-/* =========================
-   MENÚ HAMBURGUESA
-========================= */
-
-.menu-toggle {
-    display: none;
-    width: 42px;
-    height: 42px;
-    padding: 8px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-
-    z-index: 1001;
-}
-
-.menu-toggle span {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background: var(--text);
-    border-radius: 2px;
-
-    transition:
-        transform 0.3s ease,
-        opacity 0.2s ease,
-        width 0.3s ease;
-}
-
-/* =========================
-   ANIMACIÓN → X
-========================= */
-
-.menu-toggle.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-
-.menu-toggle.open span:nth-child(2) {
-    opacity: 0;
-    width: 0;
-}
-
-.menu-toggle.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 950px) {
-
-    .menu-toggle {
-        display: flex;
-    }
-
-}
-
 
 }

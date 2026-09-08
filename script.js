@@ -21,21 +21,53 @@ window.addEventListener("scroll", () => {
 
 const menuButton = document.getElementById("menuButton");
 const navMenu = document.getElementById("navMenu");
-
-menuButton.addEventListener("click", () => {
-
-    navMenu.classList.toggle("open");
-
-});
-
-
 const navLinks = document.querySelectorAll(".nav-menu a");
+
+
+/* ================= ABRIR / CERRAR ================= */
+
+if (menuButton && navMenu) {
+
+    menuButton.addEventListener("click", () => {
+
+        const isOpen = navMenu.classList.toggle("open");
+
+        menuButton.classList.toggle("open", isOpen);
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
+
+        menuButton.setAttribute(
+            "aria-label",
+            isOpen ? "Cerrar menú" : "Abrir menú"
+        );
+
+    });
+
+}
+
+
+/* ================= CERRAR AL TOCAR LINK ================= */
 
 navLinks.forEach(link => {
 
     link.addEventListener("click", () => {
 
         navMenu.classList.remove("open");
+
+        menuButton.classList.remove("open");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        menuButton.setAttribute(
+            "aria-label",
+            "Abrir menú"
+        );
 
     });
 
@@ -73,8 +105,13 @@ window.addEventListener("scroll", () => {
 
         link.classList.remove("active");
 
-        if (link.getAttribute("href") === `#${currentSection}`) {
+        if (
+            link.getAttribute("href") ===
+            `#${currentSection}`
+        ) {
+
             link.classList.add("active");
+
         }
 
     });
@@ -91,7 +128,9 @@ const elementsToReveal = document.querySelectorAll(
 );
 
 elementsToReveal.forEach(element => {
+
     element.classList.add("reveal");
+
 });
 
 
@@ -125,27 +164,34 @@ elementsToReveal.forEach(element => {
 
 
 /* =========================================================
-   CODE TYPING EFFECT
+   CODE CURSOR
 ========================================================= */
 
 const cursor = document.querySelector(".cursor");
 
-let cursorVisible = true;
+if (cursor) {
 
-setInterval(() => {
+    let cursorVisible = true;
 
-    cursorVisible = !cursorVisible;
+    setInterval(() => {
 
-    cursor.style.opacity = cursorVisible ? "1" : "0";
+        cursorVisible = !cursorVisible;
 
-}, 500);
+        cursor.style.opacity =
+            cursorVisible ? "1" : "0";
+
+    }, 500);
+
+}
 
 
 /* =========================================================
    PROJECT HOVER EFFECT
 ========================================================= */
 
-const projectCards = document.querySelectorAll(".project-card");
+const projectCards =
+    document.querySelectorAll(".project-card");
+
 
 projectCards.forEach(card => {
 
@@ -156,8 +202,11 @@ projectCards.forEach(card => {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        const rotateX = ((y / rect.height) - 0.5) * -3;
-        const rotateY = ((x / rect.width) - 0.5) * 3;
+        const rotateX =
+            ((y / rect.height) - 0.5) * -3;
+
+        const rotateY =
+            ((x / rect.width) - 0.5) * 3;
 
         card.style.transform =
             `perspective(1000px)
@@ -181,15 +230,27 @@ projectCards.forEach(card => {
    CONTACT BUTTON
 ========================================================= */
 
-const contactButtons = document.querySelectorAll(
-    'a[href="#contacto"]'
-);
+const contactButtons =
+    document.querySelectorAll('a[href="#contacto"]');
+
 
 contactButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
         navMenu.classList.remove("open");
+
+        menuButton.classList.remove("open");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        menuButton.setAttribute(
+            "aria-label",
+            "Abrir menú"
+        );
 
     });
 
