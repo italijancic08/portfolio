@@ -92,14 +92,21 @@ button {
 }
 
 .logo {
-    font-family: "Space Grotesk", sans-serif;
-
-    font-size: 25px;
-    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
-.logo span {
-    color: var(--accent-light);
+.logo img {
+    display: block;
+    width: auto;
+    height: 75px;
+    max-width: 280px;
+    object-fit: contain;
+}
+
+.footer-container .logo img {
+    height: 38px;
 }
 
 
@@ -821,10 +828,12 @@ button {
 
 .project-card.featured {
     grid-column: span 2;
-
     display: grid;
-
     grid-template-columns: 1.2fr 0.8fr;
+}
+
+.project-card-peluqueria {
+    margin-top: 20px;
 }
 
 .project-image {
@@ -933,14 +942,20 @@ button {
 }
 
 .project-link {
-    display: inline-block;
-
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     margin-top: 28px;
-
     font-size: 12px;
     font-weight: 600;
-
     transition: 0.25s ease;
+}
+
+.project-preview-note {
+    margin-top: 28px !important;
+    color: var(--accent-light) !important;
+    font-size: 12px !important;
+    font-weight: 600;
 }
 
 .project-link:hover {
@@ -1010,9 +1025,66 @@ button {
 }
 
 .service-arrow {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
     color: var(--accent-light);
+}
 
-    font-size: 25px;
+/* Flechas dibujadas con CSS: se ven igual en PC y móvil, sin emojis */
+.service-arrow::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 3px;
+    right: 3px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+}
+
+.service-arrow::after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 2px;
+    top: 10px;
+    left: 2px;
+    background: currentColor;
+    transform: rotate(-45deg);
+    transform-origin: center;
+}
+
+.arrow-icon {
+    position: relative;
+    display: inline-block;
+    width: 17px;
+    height: 14px;
+    flex: 0 0 17px;
+    vertical-align: middle;
+}
+
+.arrow-icon::before {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top: 2px;
+    right: 1px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+}
+
+.arrow-icon::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 14px;
+    left: 1px;
+    top: 6px;
+    background: currentColor;
 }
 
 
@@ -1274,8 +1346,12 @@ footer {
 
     .project-card.featured {
         grid-column: span 1;
-
         display: block;
+    }
+
+    .logo img {
+        height: 65px;
+        max-width: 240px;
     }
 
 }
@@ -1367,6 +1443,11 @@ footer {
 
     .project-card.featured {
         grid-column: span 1;
+    }
+
+    .logo img {
+        height: 65px;
+        max-width: 240px;
     }
 
     .project-image {

@@ -19,6 +19,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
         rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="/img/favicon.ico">
+
 </head>
 
 <body>
@@ -29,8 +32,8 @@
 
         <div class="container nav-container">
 
-            <a href="#inicio" class="logo">
-                VR<span>.</span>
+            <a href="#inicio" class="logo" aria-label="Valentino Rivas - Inicio">
+                <img src="img/logo.png" alt="Logo de Valentino Rivas">
             </a>
 
             <nav class="nav-menu" id="navMenu">
@@ -126,7 +129,7 @@
 
                         <a href="#proyectos" class="btn btn-primary">
                             Ver proyectos
-                            <span>→</span>
+                            <span class="arrow-icon" aria-hidden="true"></span>
                         </a>
 
                         <a href="#contacto" class="btn btn-secondary">
@@ -422,12 +425,47 @@
 
 
                         <a href="proyecto.html" class="project-link">
-                            Ver proyecto →
+                            Ver proyecto <span class="arrow-icon" aria-hidden="true"></span>
                         </a>
 
                     </div>
 
                 </article></a>
+
+                <!-- PREVIEW: SISTEMA DE GESTIÓN PARA PELUQUERÍA -->
+                <article class="project-card featured project-card-peluqueria">
+
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <span>02</span>
+                            <span>FULL STACK</span>
+                        </div>
+                        <img
+                            src="img/peluqueria-preview.png"
+                            alt="Vista previa del sistema de gestión para peluquería"
+                            class="project-real-image">
+                    </div>
+
+                    <div class="project-info">
+                        <p class="project-category">SISTEMA DE GESTIÓN PARA PELUQUERÍA</p>
+                        <h3>Gestión integral de peluquería</h3>
+                        <p>
+                            Aplicación web completa con secciones públicas y privadas.
+                            Incluye turnos online, clientes, fichas e historial, servicios,
+                            empleados, caja, stock y administración del negocio.
+                        </p>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>TypeScript</span>
+                            <span>Supabase</span>
+                            <span>PostgreSQL</span>
+                            <span>Autenticación</span>
+                            <span>Dashboard</span>
+                        </div>
+                        <p class="project-preview-note">Vista previa del proyecto</p>
+                    </div>
+
+                </article>
 
             </div>
 
@@ -475,9 +513,7 @@
 
                         </div>
 
-                        <span class="service-arrow">
-                            ↗
-                        </span>
+                        <span class="service-arrow" aria-hidden="true"></span>
 
                     </div>
 
@@ -501,9 +537,7 @@
 
                         </div>
 
-                        <span class="service-arrow">
-                            ↗
-                        </span>
+                        <span class="service-arrow" aria-hidden="true"></span>
 
                     </div>
 
@@ -527,9 +561,7 @@
 
                         </div>
 
-                        <span class="service-arrow">
-                            ↗
-                        </span>
+                        <span class="service-arrow" aria-hidden="true"></span>
 
                     </div>
 
@@ -553,9 +585,7 @@
 
                         </div>
 
-                        <span class="service-arrow">
-                            ↗
-                        </span>
+                        <span class="service-arrow" aria-hidden="true"></span>
 
                     </div>
 
@@ -594,7 +624,7 @@
                         class="btn btn-primary contact-button">
 
                         Hablemos
-                        <span>→</span>
+                        <span class="arrow-icon" aria-hidden="true"></span>
 
                     </a>
 
@@ -615,8 +645,8 @@
 
             <div>
 
-                <a href="#inicio" class="logo">
-                    VR<span>.</span>
+                <a href="#inicio" class="logo" aria-label="Valentino Rivas - Inicio">
+                    <img src="img/logo.png" alt="Logo de Valentino Rivas">
                 </a>
 
                 <p>
