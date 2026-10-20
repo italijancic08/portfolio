@@ -808,6 +808,26 @@ button {
     gap: 20px;
 }
 
+
+/* Hace que cada tarjeta de proyecto sea un enlace completo */
+.project-card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+    cursor: pointer;
+}
+
+.project-card-link:focus-visible {
+    outline: 2px solid var(--accent, #a855f7);
+    outline-offset: 5px;
+    border-radius: 12px;
+}
+
+.project-card-link .project-card {
+    height: 100%;
+}
+
 .project-card {
     overflow: hidden;
 
