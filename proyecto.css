@@ -98,18 +98,27 @@ justify-content: space-between;
 }
 
 .logo {
-font-family: "Space Grotesk", sans-serif;
+display: inline-flex;
 
+align-items: center;
 
-font-size: 25px;
-
-font-weight: 700;
-
-
+flex-shrink: 0;
 }
 
-.logo span {
-color: var(--accent-light);
+.logo img {
+display: block;
+
+width: auto;
+
+height: 75px;
+
+max-width: 280px;
+
+object-fit: contain;
+}
+
+.footer-inner .logo img {
+height: 38px;
 }
 
 .back-link {
@@ -822,6 +831,15 @@ RESPONSIVE
 
 .nav-inner {
     height: 70px;
+}
+
+.logo img {
+    height: 65px;
+    max-width: 240px;
+}
+
+.footer-inner .logo img {
+    height: 38px;
 }
 
 .back-link {
