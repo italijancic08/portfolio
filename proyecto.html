@@ -14,6 +14,26 @@
 
 <link rel="stylesheet" href="proyecto.css">
 
+<link rel="stylesheet" href="intro.css">
+
+<!-- Intro: el logo se dibuja en la navbar al entrar o recargar -->
+<script>
+    (function () {
+        var root = document.documentElement;
+        var reduce = window.matchMedia &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (reduce) return;
+
+        root.classList.add("intro-pending", "intro-short");
+
+        // seguro: si algo falla, la página se libera sola
+        setTimeout(function () {
+            root.classList.remove("intro-pending", "intro-moving", "intro-short");
+        }, 9000);
+    })();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -21,7 +41,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet">
 
-<link rel="icon" type="image/png" href="img/favicon.ico">
+<link rel="icon" type="image/png" href="img/favicon.svg">
 
 </head>
 
@@ -696,6 +716,8 @@
 
 </footer>
 
+
+<script src="intro.js"></script>
 
 </body>
 </html>

@@ -124,7 +124,7 @@ window.addEventListener("scroll", () => {
 ========================================================= */
 
 const elementsToReveal = document.querySelectorAll(
-    ".section-header, .about-text, .about-stats, .skill-card, .project-card, .service, .contact-box"
+    ".section-header, .about-text, .about-stats, .skill-card, .project-card, .service, .reviews, .contact-box"
 );
 
 elementsToReveal.forEach(element => {
@@ -255,3 +255,105 @@ contactButtons.forEach(button => {
     });
 
 });
+
+/* =========================================================
+   REVIEWS SLIDER
+========================================================= */
+
+const reviews = document.querySelector(".reviews");
+
+if (reviews) {
+
+    const track = reviews.querySelector(".reviews-track");
+    const slides = reviews.querySelectorAll(".review-slide");
+    const dotsBox = reviews.querySelector(".reviews-dots");
+
+    let current = 0;
+
+
+    /* ================= PUNTOS (barras de progreso) ================= */
+
+    const dots = Array.from(slides).map((slide, index) => {
+
+        const dot = document.createElement("button");
+
+        dot.type = "button";
+        dot.className = "reviews-dot";
+        dot.setAttribute("aria-label", `Ir a la calificación ${index + 1}`);
+
+        dot.addEventListener("click", () => goTo(index));
+
+        /* cuando termina la barra (5 s) pasa a la siguiente */
+        dot.addEventListener("animationend", event => {
+
+            if (event.animationName === "reviewsProgress") {
+                goTo(current + 1);
+            }
+
+        });
+
+        dotsBox.appendChild(dot);
+
+        return dot;
+
+    });
+
+
+    /* ================= IR A UNA SLIDE ================= */
+
+    function goTo(index) {
+
+        current = (index + slides.length) % slides.length;
+
+        track.style.transform = `translateX(-${current * 100}%)`;
+
+        slides.forEach((slide, n) => {
+            slide.setAttribute("aria-hidden", n === current ? "false" : "true");
+        });
+
+        dots.forEach((dot, n) => {
+            dot.classList.remove("is-active");
+            dot.setAttribute("aria-current", n === current ? "true" : "false");
+        });
+
+        /* reinicia la animación de la barra */
+        void dots[current].offsetWidth;
+
+        dots[current].classList.add("is-active");
+
+    }
+
+
+    /* ================= FLECHAS ================= */
+
+    document
+        .getElementById("reviewsPrev")
+        .addEventListener("click", () => goTo(current - 1));
+
+    document
+        .getElementById("reviewsNext")
+        .addEventListener("click", () => goTo(current + 1));
+
+
+    /* ================= SWIPE EN CELULAR ================= */
+
+    let touchStartX = 0;
+
+    reviews.addEventListener("touchstart", event => {
+        touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    reviews.addEventListener("touchend", event => {
+
+        const diff = event.changedTouches[0].clientX - touchStartX;
+
+        if (Math.abs(diff) > 50) {
+            goTo(diff < 0 ? current + 1 : current - 1);
+        }
+
+    }, { passive: true });
+
+
+    goTo(0);
+
+}

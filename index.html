@@ -11,6 +11,34 @@
     <title>Valentino Rivas | Full Stack Developer</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="intro.css">
+
+    <!-- Intro: decide si corre la animación de entrada (una vez por sesión) -->
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var force = /[?&]intro\b/.test(location.search);
+            var reduce = window.matchMedia &&
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var seen = false;
+            try { seen = sessionStorage.getItem("introSeen") === "1"; } catch (e) {}
+            var hasHash = location.hash && location.hash !== "#inicio";
+
+            if (!force && reduce) return;
+
+            root.classList.add("intro-pending");
+
+            // recarga o vuelta desde un proyecto: versión corta
+            if (!force && (seen || hasHash)) {
+                root.classList.add("intro-short");
+            }
+
+            // seguro: si algo falla, la página se libera sola
+            setTimeout(function () {
+                root.classList.remove("intro-pending", "intro-moving", "intro-short");
+            }, 9000);
+        })();
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +48,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="icon" type="image/png" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.svg">
 </head>
 
 <body>
@@ -51,6 +79,10 @@
 
                 <a href="#servicios">
                     Servicios
+                </a>
+
+                <a href="#calificaciones">
+                    Calificaciones
                 </a>
 
                 <a href="#contacto">
@@ -156,6 +188,16 @@
                             rel="noopener noreferrer">
 
                             LinkedIn
+
+                        </a>
+
+
+                        <a
+                            href="https://wa.me/5493482385386?text=Hola%20Valentino%2C%20vi%20tu%20portfolio%20y%20quiero%20consultarte%20por%20un%20proyecto."
+                            target="_blank"
+                            rel="noopener noreferrer">
+
+                            WhatsApp
 
                         </a>
 
@@ -372,7 +414,7 @@
 
 
                         <img
-                            src="img/sistema-gestion.png"
+                            src="img/proyecto/dashboard.png"
                             alt="Sistema de Gestión Empresarial"
                             class="project-real-image">
 
@@ -590,7 +632,151 @@
         </section>
 
 
-        <!-- ================= CONTACTO ================= -->
+        <!-- ================= CALIFICACIONES ================= -->
+
+        <section class="section reviews-section" id="calificaciones">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <p class="section-number">
+                        04 — CALIFICACIONES
+                    </p>
+
+                    <h2>
+                        Lo que dicen<br>
+                        <span>mis clientes.</span>
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="reviews"
+                    aria-roledescription="carrusel"
+                    aria-label="Calificaciones de clientes">
+
+                    <div class="reviews-viewport">
+
+                        <div class="reviews-track">
+
+                            <!-- PLACEHOLDER: reemplazar por la calificación real de Adrian -->
+                            <article class="review-slide">
+                                <div class="review-card">
+
+                                    <div class="review-stars" role="img" aria-label="5 de 5 estrellas">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+
+                                    <p class="review-text">
+                                        Antes llevábamos los trabajos, el stock y la caja en
+                                        cuadernos y planillas. Ahora está todo en un solo
+                                        sistema y sabemos en qué estado está cada pedido.
+                                        Valen entendió cómo trabaja una gráfica desde el
+                                        primer día.
+                                    </p>
+
+                                    <div class="review-author">
+                                        <span class="review-avatar" aria-hidden="true">A</span>
+                                        <div>
+                                            <strong>Adrián</strong>
+                                            <span>Gráfica · Sistema de gestión</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </article>
+
+
+                            <!-- PLACEHOLDER: reemplazar por la calificación real de Nadia -->
+                            <article class="review-slide">
+                                <div class="review-card">
+
+                                    <div class="review-stars" role="img" aria-label="5 de 5 estrellas">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+
+                                    <p class="review-text">
+                                        Los clientes sacan turnos online y yo manejo
+                                        agenda, caja y stock desde el panel. Me ordenó
+                                        el negocio y me ahorra mucho tiempo todos los
+                                        días. Siempre respondió rápido a mis consultas.
+                                    </p>
+
+                                    <div class="review-author">
+                                        <span class="review-avatar" aria-hidden="true">N</span>
+                                        <div>
+                                            <strong>Nadia</strong>
+                                            <span>Peluquería · Sistema de gestión</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </article>
+
+
+                            <!-- PLACEHOLDER: reemplazar por una calificación real -->
+                            <article class="review-slide">
+                                <div class="review-card">
+
+                                    <div class="review-stars" role="img" aria-label="5 de 5 estrellas">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+
+                                    <p class="review-text">
+                                        La página quedó moderna, rápida y se ve perfecta
+                                        en el celular. Cumplió con los plazos y estuvo
+                                        atento a cada detalle que le pedí.
+                                    </p>
+
+                                    <div class="review-author">
+                                        <span class="review-avatar" aria-hidden="true">B</span>
+                                        <div>
+                                            <strong>Bruno</strong>
+                                            <span>Emprendimiento · Página web</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </article>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="reviews-controls">
+
+                        <div class="reviews-dots"></div>
+
+                        <div class="reviews-arrows">
+
+                            <button
+                                class="reviews-arrow"
+                                id="reviewsPrev"
+                                type="button"
+                                aria-label="Calificación anterior">
+                                ←
+                            </button>
+
+                            <button
+                                class="reviews-arrow"
+                                id="reviewsNext"
+                                type="button"
+                                aria-label="Calificación siguiente">
+                                →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
 
         <section class="contact-section" id="contacto">
 
@@ -599,7 +785,7 @@
                 <div class="contact-box">
 
                     <p class="section-number">
-                        04 — CONTACTO
+                        05 — CONTACTO
                     </p>
 
                     <h2>
@@ -676,6 +862,7 @@
     </footer>
 
 
+    <script src="intro.js"></script>
     <script src="script.js"></script>
 
 </body>

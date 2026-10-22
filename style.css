@@ -1520,3 +1520,345 @@ footer {
     }
 
 }
+
+/* =========================================================
+   REVIEWS (calificaciones)
+========================================================= */
+
+.reviews {
+    --interval: 5s;   /* tiempo entre slides */
+}
+
+.reviews-viewport {
+    overflow: hidden;
+
+    border-radius: 20px;
+}
+
+.reviews-track {
+    display: flex;
+
+    transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+
+    will-change: transform;
+}
+
+.review-slide {
+    flex: 0 0 100%;
+
+    min-width: 0;
+}
+
+.review-card {
+    position: relative;
+
+    overflow: hidden;
+
+    height: 100%;
+    min-height: 340px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding: 60px 64px;
+
+    background:
+        radial-gradient(
+            circle at 90% 0%,
+            rgba(124, 58, 237, 0.18),
+            transparent 45%
+        ),
+        #101010;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+}
+
+/* comilla decorativa */
+
+.review-card::before {
+    content: "“";
+
+    position: absolute;
+
+    top: 0;
+    right: 44px;
+
+    color: rgba(155, 101, 255, 0.12);
+
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 220px;
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+.review-stars {
+    display: flex;
+
+    gap: 5px;
+
+    color: var(--accent-light);
+
+    font-size: 18px;
+}
+
+.review-text {
+    max-width: 800px;
+
+    color: var(--white);
+
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.4;
+
+    letter-spacing: -0.5px;
+}
+
+.review-author {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.review-avatar {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    color: var(--accent-light);
+
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+
+    background: rgba(124, 58, 237, 0.15);
+
+    border: 1px solid rgba(155, 101, 255, 0.35);
+
+    border-radius: 50%;
+}
+
+.review-author strong {
+    display: block;
+
+    font-size: 15px;
+}
+
+.review-author div span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* ================= CONTROLES ================= */
+
+.reviews-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 26px;
+}
+
+.reviews-dots {
+    display: flex;
+
+    gap: 8px;
+}
+
+.reviews-dot {
+    position: relative;
+
+    width: 52px;
+    height: 20px;
+
+    background: none;
+
+    border: 0;
+
+    cursor: pointer;
+}
+
+.reviews-dot::before,
+.reviews-dot::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 50%;
+
+    height: 3px;
+
+    margin-top: -1.5px;
+
+    border-radius: 2px;
+}
+
+.reviews-dot::before {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.reviews-dot::after {
+    background: var(--accent-light);
+
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.reviews-dot.is-active::after {
+    animation: reviewsProgress var(--interval) linear forwards;
+}
+
+/* la barra (y por lo tanto la rotación) se pausa al pasar el mouse o enfocar */
+
+.reviews:hover .reviews-dot.is-active::after,
+.reviews:focus-within .reviews-dot.is-active::after {
+    animation-play-state: paused;
+}
+
+@keyframes reviewsProgress {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+.reviews-arrows {
+    display: flex;
+
+    gap: 10px;
+}
+
+.reviews-arrow {
+    width: 46px;
+    height: 46px;
+
+    color: #aaa;
+
+    font-size: 18px;
+
+    background: transparent;
+
+    border: 1px solid var(--border);
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.reviews-arrow:hover {
+    color: white;
+
+    border-color: var(--accent-light);
+
+    background: rgba(124, 58, 237, 0.15);
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 950px) {
+
+    .review-card {
+        padding: 46px 40px;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .review-card {
+        min-height: 0;
+
+        gap: 30px;
+
+        padding: 34px 26px;
+    }
+
+    .review-card::before {
+        right: 20px;
+
+        font-size: 150px;
+    }
+
+    .reviews-dot {
+        width: 36px;
+    }
+
+    .reviews-arrow {
+        width: 42px;
+        height: 42px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .reviews-track {
+        transition: none;
+    }
+
+}
+
+/* =========================================================
+   SCROLLBAR (barra de desplazamiento)
+========================================================= */
+
+/* Chrome, Edge, Safari */
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #080808;
+
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #7c3aed, #4c1d95);
+
+    border: 3px solid #080808;
+
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #9b65ff, #7c3aed);
+}
+
+::-webkit-scrollbar-corner {
+    background: #080808;
+}
+
+/* Firefox */
+
+@supports not selector(::-webkit-scrollbar) {
+
+    html {
+        scrollbar-width: thin;
+        scrollbar-color: #7c3aed #080808;
+    }
+
+}

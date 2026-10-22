@@ -1,0 +1,164 @@
+/* =========================================================
+   INTRO - el logo se dibuja, se colorea y viaja a la navbar
+   (se activa solo cuando <html> tiene la clase .intro-pending)
+========================================================= */
+
+/* ---------- Estado inicial mientras corre la intro ---------- */
+
+/* el scroll solo se bloquea en la intro completa */
+html.intro-pending:not(.intro-short),
+html.intro-pending:not(.intro-short) body {
+    overflow: hidden;
+}
+
+/* cortina que tapa la página antes de que JS cree la intro (evita parpadeo) */
+html.intro-pending:not(.intro-moving)::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2900;
+    background: #080808;
+}
+
+/* el logo real de la navbar se mantiene oculto hasta que llega el logo animado */
+.navbar .logo img,
+.project-navbar .logo img {
+    transition: opacity 0.35s ease;
+}
+
+html.intro-pending .navbar .logo img,
+html.intro-pending .project-navbar .logo img {
+    opacity: 0;
+}
+
+/* hero y links del menú esperan a que el logo empiece a viajar */
+html.intro-pending:not(.intro-moving) .hero-content,
+html.intro-pending:not(.intro-moving) .hero-code {
+    animation: none;
+    opacity: 0;
+}
+
+html.intro-pending:not(.intro-moving) .nav-menu a,
+html.intro-pending:not(.intro-moving) .menu-button {
+    opacity: 0;
+}
+
+html.intro-pending.intro-moving .nav-menu a,
+html.intro-pending.intro-moving .menu-button {
+    animation: introFade 0.6s ease backwards;
+}
+
+html.intro-pending.intro-moving .nav-menu a:nth-child(1) { animation-delay: 0.25s; }
+html.intro-pending.intro-moving .nav-menu a:nth-child(2) { animation-delay: 0.32s; }
+html.intro-pending.intro-moving .nav-menu a:nth-child(3) { animation-delay: 0.39s; }
+html.intro-pending.intro-moving .nav-menu a:nth-child(4) { animation-delay: 0.46s; }
+html.intro-pending.intro-moving .nav-menu a:nth-child(5) { animation-delay: 0.53s; }
+html.intro-pending.intro-moving .nav-menu a:nth-child(6) { animation-delay: 0.60s; }
+html.intro-pending.intro-moving .menu-button { animation-delay: 0.3s; }
+
+/* páginas de proyecto: el link "Volver al portfolio" aparece suave */
+html.intro-pending.intro-moving .back-link {
+    animation: introFade 0.6s ease 0.25s backwards;
+}
+
+@keyframes introFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+/* ---------- Capa de la intro ---------- */
+
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+
+    display: grid;
+    place-items: center;
+
+    background-color: #080808;
+    cursor: pointer;
+
+    transition: background-color 1s ease 0.15s;
+}
+
+.intro.is-moving {
+    background-color: rgba(8, 8, 8, 0);
+    pointer-events: none;
+}
+
+.intro.is-done {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.intro-logo {
+    width: min(62vmin, 400px);
+    height: min(62vmin, 400px);
+
+    overflow: visible;
+    transform-origin: 50% 50%;
+    will-change: transform;
+
+    transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+
+/* ---------- 1) Se dibuja el contorno ---------- */
+
+.intro-stroke {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1;
+
+    animation: introDraw var(--dur) cubic-bezier(0.65, 0, 0.35, 1) var(--delay) forwards;
+
+    transition: opacity 0.8s ease;
+}
+
+@keyframes introDraw {
+    to { stroke-dashoffset: 0; }
+}
+
+
+/* ---------- 2) Se aplican los colores ---------- */
+
+.intro-fill {
+    opacity: 0;
+    transition: opacity 0.9s ease;
+}
+
+.intro-fill.white  { fill: #ffffff; }
+.intro-fill.purple { fill: #7c3aed; }
+
+.intro.is-filled .intro-fill   { opacity: 1; }
+.intro.is-filled .intro-stroke { opacity: 0; }
+
+/* ---------- Versión corta (recarga / volver desde un proyecto) ---------- */
+/* el logo se dibuja directamente en su lugar, en la navbar */
+
+.intro.is-short {
+    display: block;
+
+    background-color: transparent;
+
+    pointer-events: none;
+    cursor: default;
+}
+
+.intro.is-short .intro-stroke {
+    stroke-width: 22;
+
+    animation-duration: calc(var(--dur) * 0.55);
+    animation-delay: calc(var(--delay) * 0.55);
+}
+
+.intro.is-short .intro-fill {
+    transition-duration: 0.6s;
+}
