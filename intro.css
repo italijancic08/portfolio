@@ -100,6 +100,7 @@ html.intro-pending.intro-moving .back-link {
     overflow: visible;
     transform-origin: 50% 50%;
     will-change: transform;
+    -webkit-transform: translateZ(0);
 
     transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
 }

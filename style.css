@@ -10,12 +10,19 @@
 
 html {
     scroll-behavior: smooth;
+    background: #080808;
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     background: #080808;
     color: #f5f5f5;
-    font-family: "Inter", sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
 }
 
@@ -70,13 +77,17 @@ button {
 
     z-index: 1000;
 
-    background: rgba(8, 8, 8, 0.75);
+    background: rgba(8, 8, 8, 0.88);
 
-    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 
     border-bottom: 1px solid transparent;
 
-    transition: 0.3s ease;
+    transition: border-color 0.3s ease;
+
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .navbar.scrolled {
@@ -127,7 +138,7 @@ button {
     font-size: 14px;
     font-weight: 500;
 
-    transition: 0.25s ease;
+    transition: color 0.25s ease;
 }
 
 .nav-menu a:hover,
@@ -148,7 +159,7 @@ button {
 
     background: var(--accent-light);
 
-    transition: 0.25s ease;
+    transition: width 0.25s ease;
 }
 
 .nav-menu a:hover::after,
@@ -229,6 +240,7 @@ button {
 
 .hero {
     min-height: 100vh;
+    min-height: 100svh;
 
     position: relative;
 
@@ -241,19 +253,23 @@ button {
 .hero-background {
     position: absolute;
 
-    width: 600px;
-    height: 600px;
+    width: 900px;
+    height: 900px;
 
-    right: -150px;
+    right: -300px;
     top: 50%;
 
     transform: translateY(-50%);
 
-    background: var(--accent);
-
-    filter: blur(180px);
-
-    opacity: 0.12;
+    /* mismo resplandor que antes, pero sin filter: blur(180px),
+       que en Safari es lo que más CPU/GPU consume */
+    background: radial-gradient(
+        closest-side,
+        rgba(124, 58, 237, 0.13) 0%,
+        rgba(124, 58, 237, 0.07) 40%,
+        rgba(124, 58, 237, 0.02) 70%,
+        rgba(124, 58, 237, 0) 100%
+    );
 
     pointer-events: none;
 }
@@ -280,7 +296,7 @@ button {
 }
 
 .hero h1 {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
     font-size: clamp(55px, 7vw, 92px);
 
@@ -370,7 +386,7 @@ button {
     font-size: 14px;
     font-weight: 600;
 
-    transition: 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn-primary {
@@ -432,12 +448,16 @@ button {
     border-radius: 13px;
 
     box-shadow:
-        0 40px 100px rgba(0, 0, 0, 0.5),
-        0 0 80px rgba(124, 58, 237, 0.08);
+        0 30px 60px rgba(0, 0, 0, 0.5),
+        0 0 50px rgba(124, 58, 237, 0.08);
 
     transform: perspective(1000px) rotateY(-5deg);
 
-    transition: 0.5s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+
+    transition: transform 0.5s ease;
 }
 
 .code-window:hover {
@@ -517,6 +537,13 @@ button {
     vertical-align: middle;
 
     background: var(--accent-light);
+
+    animation: cursorBlink 1s steps(1, end) infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 49.99% { opacity: 1; }
+    50%, 100%  { opacity: 0; }
 }
 
 .scroll-indicator {
@@ -572,7 +599,7 @@ button {
 }
 
 .section-header h2 {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
     font-size: clamp(40px, 5vw, 65px);
 
@@ -645,7 +672,7 @@ button {
 }
 
 .stat strong {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
     font-size: 27px;
 }
@@ -684,7 +711,7 @@ button {
 
     border-radius: var(--radius);
 
-    transition: 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .skill-card:hover {
@@ -717,7 +744,7 @@ button {
 }
 
 .skill-card h3 {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
     font-size: 20px;
 }
@@ -770,7 +797,7 @@ button {
 
     color: #555;
 
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
     font-size: 13px;
 }
@@ -837,7 +864,15 @@ button {
 
     border-radius: var(--radius);
 
-    transition: 0.35s ease;
+    transition: transform 0.35s ease, border-color 0.35s ease;
+
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* mientras el mouse mueve la tarjeta, el transform sigue al cursor sin retraso */
+.project-card.is-tilting {
+    transition: border-color 0.35s ease;
 }
 
 .project-card:hover {
@@ -890,10 +925,10 @@ button {
     border-radius: 8px;
 
     box-shadow:
-        0 30px 60px rgba(0, 0, 0, 0.6),
-        0 0 50px rgba(124, 58, 237, 0.08);
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(124, 58, 237, 0.08);
 
-    transition: 0.5s ease;
+    transition: transform 0.5s ease;
 }
 
 .project-card:hover .project-real-image {
@@ -936,7 +971,7 @@ button {
 .project-info h3 {
     margin-top: 12px;
 
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
     font-size: 25px;
 }
@@ -968,7 +1003,7 @@ button {
     margin-top: 28px;
     font-size: 12px;
     font-weight: 600;
-    transition: 0.25s ease;
+    transition: color 0.25s ease;
 }
 
 .project-preview-note {
@@ -1008,7 +1043,7 @@ button {
 
     border-bottom: 1px solid var(--border);
 
-    transition: 0.3s ease;
+    transition: padding 0.3s ease, background-color 0.3s ease;
 }
 
 .service:hover {
@@ -1021,13 +1056,13 @@ button {
 .service-number {
     color: #555;
 
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
     font-size: 12px;
 }
 
 .service h3 {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
     font-size: 22px;
 }
@@ -1137,7 +1172,7 @@ button {
 }
 
 .contact-box h2 {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
     font-size: clamp(45px, 6vw, 75px);
 
@@ -1251,6 +1286,8 @@ footer {
     transition:
         opacity 0.7s ease,
         transform 0.7s ease;
+
+    will-change: opacity, transform;
 }
 
 .reveal.visible {
@@ -1533,6 +1570,10 @@ footer {
     overflow: hidden;
 
     border-radius: 20px;
+
+    isolation: isolate;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .reviews-track {
@@ -1590,7 +1631,7 @@ footer {
 
     color: rgba(155, 101, 255, 0.12);
 
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     font-size: 220px;
     line-height: 1;
 
@@ -1612,7 +1653,7 @@ footer {
 
     color: var(--white);
 
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     font-size: clamp(20px, 2.4vw, 30px);
     line-height: 1.4;
 
@@ -1637,7 +1678,7 @@ footer {
 
     color: var(--accent-light);
 
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     font-size: 17px;
     font-weight: 700;
 
@@ -1735,6 +1776,11 @@ footer {
     animation-play-state: paused;
 }
 
+/* fuera de pantalla el carrusel no avanza ni anima */
+.reviews.is-offscreen .reviews-dot.is-active::after {
+    animation-play-state: paused;
+}
+
 @keyframes reviewsProgress {
     from { transform: scaleX(0); }
     to   { transform: scaleX(1); }
@@ -1762,7 +1808,7 @@ footer {
 
     cursor: pointer;
 
-    transition: 0.25s ease;
+    transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 }
 
 .reviews-arrow:hover {
@@ -1813,8 +1859,22 @@ footer {
 
 @media (prefers-reduced-motion: reduce) {
 
+    html {
+        scroll-behavior: auto;
+    }
+
     .reviews-track {
         transition: none;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .cursor {
+        animation: none;
     }
 
 }

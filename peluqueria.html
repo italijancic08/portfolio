@@ -27,15 +27,25 @@
     })();
 </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="img/favicon.svg">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- las fuentes no bloquean el render: se aplican apenas llegan (display=swap) -->
+    <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+    </noscript>
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <meta name="theme-color" content="#080808">
+    <meta name="color-scheme" content="dark">
+    <link rel="preload" as="image" href="img/logo.png">
+    <script src="intro.js" defer></script>
 </head>
 <body>
-<header class="project-navbar"><div class="project-container nav-inner"><a href="index.html" class="logo" aria-label="Valentino Rivas - Inicio"><img src="img/logo.png" alt="Logo de Valentino Rivas"></a><a href="index.html#proyectos" class="back-link">← Volver al portfolio</a></div></header>
+<header class="project-navbar"><div class="project-container nav-inner"><a href="index.html" class="logo" aria-label="Valentino Rivas - Inicio"><img src="img/logo.png" alt="Logo de Valentino Rivas" width="300" height="300" decoding="async"></a><a href="index.html#proyectos" class="back-link">← Volver al portfolio</a></div></header>
 <main>
   <section class="project-hero"><div class="project-container"><div class="hero-label"><span>02</span> PROYECTOS DESTACADOS</div><h1>Gestión integral <span>de peluquería.</span></h1><p class="hero-description">Plataforma web pensada para organizar el día a día de una peluquería: turnos, clientes, servicios, equipo de trabajo y administración del negocio desde un único lugar.</p><div class="hero-tags"><span>React</span><span>TypeScript</span><span>Supabase</span><span>PostgreSQL</span><span>Dashboard</span></div></div></section>
-  <section class="main-preview"><div class="project-container"><div class="main-image"><img src="img/peluqueria/dashboard.png" alt="Dashboard del sistema de gestión de peluquería"></div></div></section>
+  <section class="main-preview"><div class="project-container"><div class="main-image"><picture><source srcset="img/peluqueria/dashboard.webp" type="image/webp"><img src="img/peluqueria/dashboard.png" alt="Dashboard del sistema de gestión de peluquería" width="1600" height="782" fetchpriority="high" decoding="async"></picture></div></div></section>
   <section class="project-section"><div class="project-container"><div class="section-grid"><div><p class="section-number">01 — DESCRIPCIÓN</p><h2>Todo el negocio <span>organizado.</span></h2></div><div class="section-text"><p>El sistema está orientado a centralizar la administración de una peluquería y simplificar las tareas cotidianas del personal.</p><p>La plataforma combina una experiencia pública para que los clientes puedan consultar servicios y solicitar turnos con un área privada desde la que se administra la agenda y la operación del negocio.</p><p>La estructura contempla la gestión de clientes, fichas e historial, servicios, empleados, caja y stock, con acceso a las herramientas según el rol de cada usuario.</p></div></div></div></section>
   <section class="project-section dark-section"><div class="project-container"><div class="section-heading"><p class="section-number">02 — FUNCIONALIDADES</p><h2>Una gestión <span>más simple.</span></h2></div><div class="features-grid">
     <article class="feature-card"><span class="feature-number">01</span><h3>Turnos online</h3><p>Consulta y solicitud de turnos, agenda diaria y seguimiento de reservas.</p></article>
@@ -48,18 +58,16 @@
     <article class="feature-card"><span class="feature-number">08</span><h3>Administración</h3><p>Área privada para centralizar la operación y mantener protegida la información.</p></article>
   </div></div></section>
   <section class="project-section"><div class="project-container"><div class="section-heading"><p class="section-number">03 — GALERÍA</p><h2>El sistema <span>por dentro.</span></h2></div><div class="gallery">
-    <div class="gallery-item large"><img src="img/peluqueria/dashboard.png" alt="Dashboard del sistema"></div>
-    <div class="gallery-item"><img src="img/peluqueria/turnos.png" alt="Módulo de turnos"></div>
-    <div class="gallery-item"><img src="img/peluqueria/clientes.png" alt="Módulo de clientes"></div>
-    <div class="gallery-item large"><img src="img/peluqueria/caja.png" alt="Módulo de caja"></div>
+    <div class="gallery-item large"><picture><source srcset="img/peluqueria/dashboard.webp" type="image/webp"><img src="img/peluqueria/dashboard.png" alt="Dashboard del sistema" width="1600" height="782" loading="lazy" decoding="async"></picture></div>
+    <div class="gallery-item"><picture><source srcset="img/peluqueria/turnos.webp" type="image/webp"><img src="img/peluqueria/turnos.png" alt="Módulo de turnos" width="1365" height="703" loading="lazy" decoding="async"></picture></div>
+    <div class="gallery-item"><picture><source srcset="img/peluqueria/clientes.webp" type="image/webp"><img src="img/peluqueria/clientes.png" alt="Módulo de clientes" width="1600" height="782" loading="lazy" decoding="async"></picture></div>
+    <div class="gallery-item large"><picture><source srcset="img/peluqueria/caja.webp" type="image/webp"><img src="img/peluqueria/caja.png" alt="Módulo de caja" width="1600" height="781" loading="lazy" decoding="async"></picture></div>
   </div></div></section>
   <section class="project-section"><div class="project-container"><div class="section-heading"><p class="section-number">04 — TECNOLOGÍAS</p><h2>Una base <span>moderna.</span></h2></div><div class="technology-list"><div class="technology"><strong>React</strong><span>Interfaz de usuario</span></div><div class="technology"><strong>TypeScript</strong><span>Tipado y mantenibilidad</span></div><div class="technology"><strong>Supabase</strong><span>Servicios backend</span></div><div class="technology"><strong>PostgreSQL</strong><span>Base de datos</span></div><div class="technology"><strong>Autenticación</strong><span>Acceso al área privada</span></div><div class="technology"><strong>Diseño responsive</strong><span>Adaptación a distintos dispositivos</span></div></div></div></section>
   <section class="project-section dark-section"><div class="project-container"><div class="section-heading"><p class="section-number">05 — ARQUITECTURA</p><h2>Una solución <span>conectada.</span></h2></div><div class="architecture"><div class="architecture-box"><span>01</span><strong>Frontend</strong><p>React + TypeScript</p></div><div class="architecture-arrow">→</div><div class="architecture-box"><span>02</span><strong>Backend</strong><p>Supabase + autenticación</p></div><div class="architecture-arrow">→</div><div class="architecture-box"><span>03</span><strong>Datos</strong><p>PostgreSQL</p></div></div></div></section>
   <section class="project-section"><div class="project-container"><div class="section-grid"><div><p class="section-number">06 — RESULTADO</p><h2>Más tiempo para <span>cada cliente.</span></h2></div><div class="section-text"><p>La propuesta reúne en una plataforma los procesos principales de una peluquería, evitando tener la agenda, los clientes y la administración repartidos entre herramientas diferentes.</p><p>El resultado es una base de gestión clara y ampliable, enfocada en mejorar la organización del equipo y la experiencia de los clientes.</p></div></div></div></section>
   <section class="project-cta"><div class="project-container"><p class="section-number">¿VEMOS TU IDEA?</p><h2>Hagamos algo <span>útil.</span></h2><p>Desarrollo soluciones digitales adaptadas a las necesidades de cada negocio.</p><div class="cta-buttons"><a href="index.html#contacto" class="btn btn-primary">Contactarme</a><a href="index.html#proyectos" class="btn btn-secondary">Ver otros proyectos</a></div></div></section>
 </main>
-<footer><div class="project-container footer-inner"><div><a href="index.html" class="logo" aria-label="Valentino Rivas - Inicio"><img src="img/logo.png" alt="Logo de Valentino Rivas"></a><p>Full Stack Developer</p></div><p>© Valentino Rivas</p></div></footer>
-<script src="intro.js"></script>
-
+<footer><div class="project-container footer-inner"><div><a href="index.html" class="logo" aria-label="Valentino Rivas - Inicio"><img src="img/logo.png" alt="Logo de Valentino Rivas" width="300" height="300" decoding="async"></a><p>Full Stack Developer</p></div><p>© Valentino Rivas</p></div></footer>
 </body>
 </html>

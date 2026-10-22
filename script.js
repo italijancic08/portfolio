@@ -4,15 +4,32 @@
 
 const navbar = document.querySelector(".navbar");
 
-window.addEventListener("scroll", () => {
+let navScrolled = false;
+let scrollTicking = false;
 
-    if (window.scrollY > 30) {
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
+function updateNavbar() {
+
+    scrollTicking = false;
+
+    const scrolled = window.scrollY > 30;
+
+    if (scrolled !== navScrolled) {
+        navScrolled = scrolled;
+        navbar.classList.toggle("scrolled", scrolled);
     }
 
-});
+}
+
+window.addEventListener("scroll", () => {
+
+    if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(updateNavbar);
+    }
+
+}, { passive: true });
+
+updateNavbar();
 
 
 /* =========================================================
@@ -80,43 +97,53 @@ navLinks.forEach(link => {
 
 const sections = document.querySelectorAll("section[id]");
 
-window.addEventListener("scroll", () => {
+let activeId = "";
 
-    let currentSection = "";
+function setActiveLink(id) {
 
-    sections.forEach(section => {
+    if (id === activeId) return;
 
-        const sectionTop = section.offsetTop - 150;
-        const sectionHeight = section.offsetHeight;
-
-        if (
-            window.scrollY >= sectionTop &&
-            window.scrollY < sectionTop + sectionHeight
-        ) {
-
-            currentSection = section.getAttribute("id");
-
-        }
-
-    });
-
+    activeId = id;
 
     navLinks.forEach(link => {
-
-        link.classList.remove("active");
-
-        if (
-            link.getAttribute("href") ===
-            `#${currentSection}`
-        ) {
-
-            link.classList.add("active");
-
-        }
-
+        link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
     });
 
-});
+}
+
+let sectionObserver = null;
+
+function observeSections() {
+
+    if (!("IntersectionObserver" in window)) return;
+
+    if (sectionObserver) sectionObserver.disconnect();
+
+    /* franja de 1px a 150px del borde superior: la sección que la cruza es la activa */
+    const bottom = Math.max(window.innerHeight - 151, 0);
+
+    sectionObserver = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+            if (entry.isIntersecting) setActiveLink(entry.target.id);
+        });
+
+    }, { rootMargin: `-150px 0px -${bottom}px 0px` });
+
+    sections.forEach(section => sectionObserver.observe(section));
+
+}
+
+observeSections();
+
+let resizeTimer;
+
+window.addEventListener("resize", () => {
+
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(observeSections, 200);
+
+}, { passive: true });
 
 
 /* =========================================================
@@ -134,55 +161,57 @@ elementsToReveal.forEach(element => {
 });
 
 
-const revealObserver = new IntersectionObserver(
-    entries => {
+function finishReveal(element) {
 
-        entries.forEach(entry => {
+    /* ya no hace falta: libera la capa y devuelve el control de transform/transition */
+    element.classList.remove("reveal", "visible");
 
-            if (entry.isIntersecting) {
+}
 
-                entry.target.classList.add("visible");
+if ("IntersectionObserver" in window) {
 
-                revealObserver.unobserve(entry.target);
+    const revealObserver = new IntersectionObserver(
+        entries => {
 
-            }
+            entries.forEach(entry => {
 
-        });
+                if (entry.isIntersecting) {
 
-    },
-    {
-        threshold: 0.12
-    }
-);
+                    const element = entry.target;
 
+                    element.classList.add("visible");
 
-elementsToReveal.forEach(element => {
+                    revealObserver.unobserve(element);
 
-    revealObserver.observe(element);
+                    setTimeout(() => finishReveal(element), 900);
 
-});
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+    elementsToReveal.forEach(element => {
+        revealObserver.observe(element);
+    });
+
+} else {
+
+    /* navegadores sin IntersectionObserver: todo visible */
+    elementsToReveal.forEach(finishReveal);
+
+}
 
 
 /* =========================================================
    CODE CURSOR
 ========================================================= */
 
-const cursor = document.querySelector(".cursor");
-
-if (cursor) {
-
-    let cursorVisible = true;
-
-    setInterval(() => {
-
-        cursorVisible = !cursorVisible;
-
-        cursor.style.opacity =
-            cursorVisible ? "1" : "0";
-
-    }, 500);
-
-}
+/* el parpadeo del cursor se hace con CSS (@keyframes cursorBlink) */
 
 
 /* =========================================================
@@ -192,38 +221,72 @@ if (cursor) {
 const projectCards =
     document.querySelectorAll(".project-card");
 
+const canTilt =
+    window.matchMedia &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-projectCards.forEach(card => {
+if (canTilt) {
 
-    card.addEventListener("mousemove", event => {
+    projectCards.forEach(card => {
 
-        const rect = card.getBoundingClientRect();
+        let rect = null;
+        let frame = 0;
+        let pointerX = 0;
+        let pointerY = 0;
 
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        function paint() {
 
-        const rotateX =
-            ((y / rect.height) - 0.5) * -3;
+            frame = 0;
 
-        const rotateY =
-            ((x / rect.width) - 0.5) * 3;
+            if (!rect) return;
 
-        card.style.transform =
-            `perspective(1000px)
-             rotateX(${rotateX}deg)
-             rotateY(${rotateY}deg)
-             translateY(-5px)`;
+            const x = pointerX - rect.left;
+            const y = pointerY - rect.top;
+
+            const rotateX = ((y / rect.height) - 0.5) * -3;
+            const rotateY = ((x / rect.width) - 0.5) * 3;
+
+            card.style.transform =
+                `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+
+        }
+
+        card.addEventListener("mouseenter", () => {
+
+            rect = card.getBoundingClientRect();
+
+            card.classList.add("is-tilting");
+
+        });
+
+        card.addEventListener("mousemove", event => {
+
+            pointerX = event.clientX;
+            pointerY = event.clientY;
+
+            if (!frame) frame = requestAnimationFrame(paint);
+
+        }, { passive: true });
+
+        card.addEventListener("mouseleave", () => {
+
+            rect = null;
+
+            if (frame) {
+                cancelAnimationFrame(frame);
+                frame = 0;
+            }
+
+            card.classList.remove("is-tilting");
+
+            card.style.transform = "";
+
+        });
 
     });
 
-
-    card.addEventListener("mouseleave", () => {
-
-        card.style.transform = "";
-
-    });
-
-});
+}
 
 
 /* =========================================================
@@ -355,5 +418,18 @@ if (reviews) {
 
 
     goTo(0);
+
+
+    /* ================= PAUSA FUERA DE PANTALLA ================= */
+
+    if ("IntersectionObserver" in window) {
+
+        new IntersectionObserver(entries => {
+
+            reviews.classList.toggle("is-offscreen", !entries[0].isIntersecting);
+
+        }, { threshold: 0.05 }).observe(reviews);
+
+    }
 
 }

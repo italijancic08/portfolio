@@ -35,14 +35,21 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- las fuentes no bloquean el render: se aplican apenas llegan (display=swap) -->
+    <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+    </noscript>
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
-    rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 
-<link rel="icon" type="image/png" href="img/favicon.svg">
-
+    <meta name="theme-color" content="#080808">
+    <meta name="color-scheme" content="dark">
+    <link rel="preload" as="image" href="img/logo.png">
+    <script src="intro.js" defer></script>
 </head>
 
 <body>
@@ -55,7 +62,7 @@
     <div class="project-container nav-inner">
 
         <a href="index.html" class="logo" aria-label="Valentino Rivas - Inicio">
-            <img src="img/logo.png" alt="Logo de Valentino Rivas">
+            <img src="img/logo.png" alt="Logo de Valentino Rivas" width="300" height="300" decoding="async">
         </a>
 
         <a href="index.html#proyectos" class="back-link">
@@ -116,9 +123,7 @@
 
                 <!-- CAMBIAR ESTA IMAGEN -->
 
-                <img
-                    src="img/proyecto/dashboard.png"
-                    alt="Dashboard del Sistema de Gestión Empresarial">
+                <picture><source srcset="img/proyecto/dashboard.webp" type="image/webp"><img src="img/proyecto/dashboard.png" alt="Dashboard del Sistema de Gestión Empresarial" width="1359" height="767" fetchpriority="high" decoding="async"></picture>
 
             </div>
 
@@ -345,9 +350,7 @@
 
                 <div class="gallery-item large">
 
-                    <img
-                        src="img/proyecto/dashboard.png"
-                        alt="Dashboard del sistema">
+                    <picture><source srcset="img/proyecto/dashboard.webp" type="image/webp"><img src="img/proyecto/dashboard.png" alt="Dashboard del sistema" width="1359" height="767" loading="lazy" decoding="async"></picture>
 
                 </div>
 
@@ -356,9 +359,7 @@
 
                 <div class="gallery-item">
 
-                    <img
-                        src="img/proyecto/clientes.png"
-                        alt="Módulo de clientes">
+                    <picture><source srcset="img/proyecto/clientes.webp" type="image/webp"><img src="img/proyecto/clientes.png" alt="Módulo de clientes" width="1359" height="767" loading="lazy" decoding="async"></picture>
 
                 </div>
 
@@ -367,9 +368,7 @@
 
                 <div class="gallery-item">
 
-                    <img
-                        src="img/proyecto/trabajos.png"
-                        alt="Módulo de trabajos">
+                    <picture><source srcset="img/proyecto/trabajos.webp" type="image/webp"><img src="img/proyecto/trabajos.png" alt="Módulo de trabajos" width="1359" height="767" loading="lazy" decoding="async"></picture>
 
                 </div>
 
@@ -378,9 +377,7 @@
 
                 <div class="gallery-item large">
 
-                    <img
-                        src="img/proyecto/stock.png"
-                        alt="Módulo de stock">
+                    <picture><source srcset="img/proyecto/stock.webp" type="image/webp"><img src="img/proyecto/stock.png" alt="Módulo de stock" width="1359" height="767" loading="lazy" decoding="async"></picture>
 
                 </div>
 
@@ -699,7 +696,7 @@
         <div>
 
             <a href="index.html" class="logo" aria-label="Valentino Rivas - Inicio">
-                <img src="img/logo.png" alt="Logo de Valentino Rivas">
+                <img src="img/logo.png" alt="Logo de Valentino Rivas" width="300" height="300" decoding="async">
             </a>
 
             <p>
@@ -715,9 +712,5 @@
     </div>
 
 </footer>
-
-
-<script src="intro.js"></script>
-
 </body>
 </html>

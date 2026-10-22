@@ -10,12 +10,19 @@ RESET
 
 html {
 scroll-behavior: smooth;
+background: #080808;
+color-scheme: dark;
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+-webkit-tap-highlight-color: transparent;
 }
 
 body {
 background: #080808;
 color: #f5f5f5;
-font-family: "Inter", sans-serif;
+font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
 overflow-x: hidden;
 }
 
@@ -75,9 +82,13 @@ width: 100%;
 
 z-index: 100;
 
-background: rgba(8, 8, 8, 0.8);
+background: rgba(8, 8, 8, 0.88);
 
-backdrop-filter: blur(15px);
+-webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(10px);
+
+-webkit-transform: translateZ(0);
+transform: translateZ(0);
 
 border-bottom: 1px solid var(--border);
 
@@ -127,7 +138,7 @@ color: #777;
 
 font-size: 13px;
 
-transition: 0.25s ease;
+transition: color 0.25s ease;
 
 
 }
@@ -174,7 +185,7 @@ color: #555;
 max-width: 950px;
 
 
-font-family: "Space Grotesk", sans-serif;
+font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
 font-size: clamp(55px, 8vw, 105px);
 
@@ -256,8 +267,12 @@ border-radius: 16px;
 background: #101010;
 
 box-shadow:
-    0 40px 100px rgba(0, 0, 0, 0.5),
-    0 0 80px rgba(124, 58, 237, 0.08);
+    0 30px 60px rgba(0, 0, 0, 0.5),
+    0 0 50px rgba(124, 58, 237, 0.08);
+
+isolation: isolate;
+-webkit-transform: translateZ(0);
+transform: translateZ(0);
 
 
 }
@@ -268,7 +283,7 @@ aspect-ratio: 16 / 9;
 
 object-fit: cover;
 
-transition: 0.5s ease;
+transition: transform 0.5s ease;
 
 
 }
@@ -323,7 +338,7 @@ letter-spacing: 3px;
 
 .section-grid h2,
 .section-heading h2 {
-font-family: "Space Grotesk", sans-serif;
+font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
 
 font-size: clamp(40px, 5vw, 65px);
@@ -390,7 +405,7 @@ border: 1px solid var(--border);
 
 border-radius: var(--radius);
 
-transition: 0.3s ease;
+transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 
 
 }
@@ -414,7 +429,7 @@ margin-bottom: 45px;
 
 color: #555;
 
-font-family: "Space Grotesk", sans-serif;
+font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
 font-size: 11px;
 
@@ -422,7 +437,7 @@ font-size: 11px;
 }
 
 .feature-card h3 {
-font-family: "Space Grotesk", sans-serif;
+font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
 
 font-size: 20px;
@@ -468,6 +483,10 @@ border-radius: 12px;
 
 background: #101010;
 
+isolation: isolate;
+-webkit-transform: translateZ(0);
+transform: translateZ(0);
+
 
 }
 
@@ -477,9 +496,10 @@ grid-column: span 2;
 
 .gallery-item img {
 width: 100%;
+height: auto;
 
 
-transition: 0.5s ease;
+transition: transform 0.5s ease;
 
 
 }
@@ -525,7 +545,7 @@ background: #0b0b0b;
 }
 
 .technology strong {
-font-family: "Space Grotesk", sans-serif;
+font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
 
 font-size: 18px;
@@ -596,7 +616,7 @@ font-size: 10px;
 }
 
 .architecture-box strong {
-font-family: "Space Grotesk", sans-serif;
+font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
 
 font-size: 21px;
@@ -645,7 +665,7 @@ background:
 }
 
 .project-cta h2 {
-font-family: "Space Grotesk", sans-serif;
+font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
 
 font-size: clamp(45px, 6vw, 75px);
@@ -703,7 +723,7 @@ font-size: 13px;
 
 font-weight: 600;
 
-transition: 0.3s ease;
+transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 
 
 }
@@ -958,4 +978,12 @@ RESPONSIVE
         scrollbar-color: #7c3aed #080808;
     }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+picture {
+display: block;
 }
